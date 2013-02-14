@@ -1,5 +1,7 @@
-[jQuery imageMap Plugin](https://github.com/georgeyord/imagemap) - Overlay image map with effects on hover
+[jQuery imageMap Plugin](https://github.com/georgeyord/imagemap)
 ================================
+Overlay image map with effects on hover
+--------------------------------
 
 
 The jQuery ImageMap class adds elements (images) to the appropriate positions on the target element and executes some effect (default: resize with animation) when the mouse passes over (or click or any other event set) these elements.
@@ -29,7 +31,7 @@ $('#example1').imageMap(
 
 ## Usage
 
-''Main config''
+### Main config
 The config object MUST contain the elements array. Element structure explained later.
 There are also the following OPTIONAL attributes:
 - debug: if set true, extensive information is logged in console
@@ -42,14 +44,14 @@ There are also the following OPTIONAL attributes:
 - imageClass: override the default image class "imageClass"
 - additionalImageClass: append more classes to imageClass mentioned above
 
-''Element structure''
+### Element structure
 - image: REQUIRED - path to image filename
 - position: REQUIRED - distance from top/left corner of the target element
 - size: REQUIRED - width/height of the initial image
 - link: OPTIONAL - if set the image will be an active link
 - effect: OPTIONAL override the default values for the effects, explained in detail later
 
-''Effect structure''
+### Effect structure
 ImageMap supports resize effect and styling through css rules.
 Resize config can contain either a "factor" to the final size or the exact "width".
 Css config can contain any css styling rules.
