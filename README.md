@@ -12,7 +12,7 @@ Include jQuery and the plugin on a page. Then select an element add the overlay:
 
 ```html
 <script src="jquery.js"></script>
-<script src="jquery.imagepap.js"></script>
+<script src="jquery.imagemap.js"></script>
 <script>
 $('#example1').imageMap(
 {
