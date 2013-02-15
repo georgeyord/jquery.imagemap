@@ -102,7 +102,7 @@ $('#example1').imageMap(
             $.each(_options.elements,function(index,imageConfig){
                 if(typeof imageConfig.image != 'undefined' && typeof imageConfig.position != 'undefined' && typeof imageConfig.position.top != 'undefined' && typeof imageConfig.position.left != 'undefined'){
 
-                    var oImage = $("<image></image>");
+                    var oImage = $("<image></image>").css({outline: 'none'});
                     oImage.css({
                         display: 'block',
                         position: 'absolute',
@@ -110,7 +110,7 @@ $('#example1').imageMap(
                         left: imageConfig.position.left
                     })
                     .data('config',imageConfig)
-                    .attr('src','./'+imageConfig.image)
+                    .attr('src',imageConfig.image)
                     .addClass(_options.mainPrefix+_options.imageClass);
 <?php if($debug): ?>
                     if(_options.debug)
@@ -146,10 +146,8 @@ $('#example1').imageMap(
                             zIndex: imageConfig.zIndex
                         });
 
-                    var oElement = (typeof imageConfig.link != 'undefined')?$("<a></a>"):$("<div></div>");
-                    oElement.css({
-                        outline: 'none'
-                    })
+                    var oElement = (typeof imageConfig.link != 'undefined')?$("<a></a>").css({outline: 'none'}):$("<div></div>");
+                    oElement
                     .attr('href',imageConfig.link)
                     .append(oImage);
                     oContainer.append(oElement);
@@ -158,10 +156,11 @@ $('#example1').imageMap(
                     var effect = false;
                     if(typeof imageConfig.effect == 'undefined')
                         imageConfig.effect = _options.effect; // Use default config as a fallback
-                    if(typeof imageConfig.effect.resize != 'undefined'
-                        && ((typeof imageConfig.effect.resize.active == 'undefined' && _options.effect.resize.active === true)
+                    if(typeof imageConfig.effect.resize == 'undefined')
+                        imageConfig.effect.resize = _options.effect.resize; // Use default config as a fallback
+                    if((typeof imageConfig.effect.resize.active == 'undefined' && _options.effect.resize.active === true)
                             || (typeof imageConfig.effect.resize.active != 'undefined' && imageConfig.effect.resize.active=== true)
-                            )) {
+                            ) {
                         oElement.<?php echo $j14?'bind':'on'; ?>(_options.event.on,function(e) {
                             effect = 'resize';
                             e.preventDefault();
@@ -234,10 +233,44 @@ $('#example1').imageMap(
                         });
                     }
 
-                    if(typeof imageConfig.effect.style != 'undefined'
-                        && ((typeof imageConfig.effect.style.active == 'undefined' && _options.effect.style.active === true)
-                            || (typeof imageConfig.effect.style.active != 'undefined' && imageConfig.effect.style.active=== true)
+                    if(typeof imageConfig.effect.image != 'undefined'
+                        && ((typeof imageConfig.effect.image.active == 'undefined' && _options.effect.image.active === true)
+                            || (typeof imageConfig.effect.image.active != 'undefined' && imageConfig.effect.image.active=== true)
                             )) {
+                        oElement.on(_options.event.on,function(e) {
+                            effect = 'image';
+                            e.preventDefault();
+<?php if($debug): ?>
+                            if(_options.debug)
+                                console.log('Event triggered: '+_options.event.on+' - effect: '+effect+' - source: ',imageConfig.effect.image.src);
+<?php endif; ?>
+
+                            var link = $(this);
+                            var image = link.children('.'+_options.mainPrefix+_options.imageClass);
+
+                            var imageSrc = image.attr('src');
+                            image.attr('src',imageConfig.effect.image.src)
+
+                            // Bind reverse event
+                            link.on(_options.event.off,function(){
+<?php if($debug): ?>
+                                if(_options.debug)
+                                    console.log('Event triggered: '+_options.event.off+' - effect: '+effect+' - source: ',imageSrc);
+<?php endif; ?>
+
+                                // Reverse styling
+                                $(this).children('.'+_options.mainPrefix+_options.imageClass)
+                                .attr('src',imageSrc)
+                                .off(_options.event.off);
+                            });
+                        });
+                    }
+
+                    if(typeof imageConfig.effect.style== 'undefined')
+                        imageConfig.effect.style = _options.effect.style; // Use default config as a fallback
+                    if((typeof imageConfig.effect.style.active == 'undefined' && _options.effect.style.active === true)
+                            || (typeof imageConfig.effect.style.active != 'undefined' && imageConfig.effect.style.active=== true)
+                            ) {
                         oElement.<?php echo $j14?'bind':'on'; ?>(_options.event.on,function(e) {
                             effect = 'styling';
                             e.preventDefault();
@@ -271,13 +304,13 @@ $('#example1').imageMap(
                             });
                         });
                     }
-                    if(typeof _options.effect == 'function') {
+                    if(typeof imageConfig.effect.callback != 'undefined') {
                         effect = 'function';
 <?php if($debug): ?>
                         if(_options.debug)
-                            console.log('Callback function was binded.');
+                            console.log('Custom function was binded.');
 <?php endif; ?>
-                        oElement.<?php echo $j14?'bind':'on'; ?>(_options.event.on, _options.effect);
+                        oElement.<?php echo $j14?'bind':'on'; ?>((typeof imageConfig.effect.callback.on != 'undefined'?imageConfig.effect.callback.on:_options.event.on), imageConfig.effect.callback.f);
                     }
 <?php if($debug): ?>
                     if(effect == false && _options.debug)

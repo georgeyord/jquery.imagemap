@@ -7,18 +7,46 @@
         <script src="../js/jquery.imagemap.js" language="javascript"></script>
         <script language="javascript">
             $(document).ready(function() {
+                // Used as a function callback
+                var callback =
+                function(e) {
+                    var $this = $(this);
+                    if ($this.attr('href'))
+                        return confirm('Custon callback activated on click\nGo to: "'+$this.attr('href')+'"?');
+
+                    e.preventDefault();
+                };
                 $('#main').imageMap({
                     // debug: true,
                     elements: [
+                        // Custom callback to call a predefined function on click
                         {
                             image: "images/pisa/part_01.png",
+                            link: "http://www.webwonder.gr",
                             position: {top: 74, left: 33},
-                            size: {width: 166, height: 147}
+                            size: {width: 166, height: 147},
+                            effect: {
+                                callback: {
+                                    on: 'click',
+                                    f: callback
+                                }
+                            }
                         },
+                        // Custom callback to call an anonymoun function on mouseenter
                         {
                             image: "images/pisa/part_02.png",
                             position: {top: 147, left: 233},
-                            size: {width: 73, height: 59}
+                            size: {width: 73, height: 59},
+                            effect: {
+                                resize: { active: false },
+                                style: { active: true },
+                                callback: {
+                                    on: 'mouseenter',
+                                    f: function(e) {
+                                        alert('Custon callback activated on mouse enter')
+                                    }
+                                }
+                            }
                         },
                         {
                             image: "images/pisa/part_03.png",
@@ -61,7 +89,11 @@
         </script>
     </head>
     <body>
-        <h2>Demostration of basic usage</h2>
+        <h2>Demostration of callback functionality</h2>
+        <ul>
+            <li>Top left image: Custom callback to call a predefined function on click</li>
+            <li>Top right image: Custom callback to call an anonymoun function on mouseenter</li>
+        </ul>
         <div id="main">
             <img src="images/pisa/main.jpg" alt="">
         </div>

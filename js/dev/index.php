@@ -7,6 +7,16 @@
         <?php require_once './jquery.imagemap.php'; ?>
         <script language="javascript">
             $(document).ready(function() {
+                // Used as a function callback
+                var callback =
+                function(e) {
+                    var $this = $(this);
+                    console.log('Function call back activated'.$this);
+                    if ($this.attr('href'))
+                        return confirm("Go to: "+$this.attr('href'));
+
+                    e.preventDefault();
+                };
                 $('#main').imageMap({
                     // debug: true,
                     elements: [
@@ -14,6 +24,7 @@
                         // Style effect active with custom css
                         {
                             image: "../../example/images/pisa/part_01.png",
+                            link: "http://www.webwonder.gr",
                             position: {top: 74, left: 33},
                             size: {width: 166, height: 147},
                             effect: {
@@ -28,6 +39,10 @@
                                         boxShadow: '0px 0px 15px 5px rgba(255, 255, 190, .75)',
                                         boxSizing: "border-box"
                                     }
+                                },
+                                callback: {
+                                    on: 'click',
+                                    f: callback
                                 }
                             }
                         },

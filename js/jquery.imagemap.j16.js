@@ -41,7 +41,6 @@ $('#example1').imageMap(
             duration: 500
         },
         preloadImages: true,
-        debug: false,
         elements: {},
         zIndex: 'auto',
 
@@ -64,17 +63,9 @@ $('#example1').imageMap(
                 position: 'relative'
             })
             .addClass(_options.mainPrefix+_options.containerClass);
-            if(_options.debug){
-                oContainer.css({
-                    border: 'blue 1px dashed'
-                });
-                console.log('Target element created successfully');
-            }
 
             // Preload images
             if(_options.preloadImages) {
-                if(_options.debug)
-                    console.log('Images preloading was activated');
                 $.each(_options.elements,function(index,imageConfig){
                     $('<img/>')[0].src = imageConfig.image;
                     // Alternatively way:
@@ -87,7 +78,7 @@ $('#example1').imageMap(
             $.each(_options.elements,function(index,imageConfig){
                 if(typeof imageConfig.image != 'undefined' && typeof imageConfig.position != 'undefined' && typeof imageConfig.position.top != 'undefined' && typeof imageConfig.position.left != 'undefined'){
 
-                    var oImage = $("<image></image>");
+                    var oImage = $("<image></image>").css({outline: 'none'});
                     oImage.css({
                         display: 'block',
                         position: 'absolute',
@@ -95,12 +86,8 @@ $('#example1').imageMap(
                         left: imageConfig.position.left
                     })
                     .data('config',imageConfig)
-                    .attr('src','./'+imageConfig.image)
+                    .attr('src',imageConfig.image)
                     .addClass(_options.mainPrefix+_options.imageClass);
-                    if(_options.debug)
-                        oImage.css({
-                            border: 'red 1px dashed'
-                        });
                     if(typeof imageConfig.size != 'undefined'){
                         if(typeof imageConfig.size.width != 'undefined')
                             oImage.css({
@@ -129,10 +116,8 @@ $('#example1').imageMap(
                             zIndex: imageConfig.zIndex
                         });
 
-                    var oElement = (typeof imageConfig.link != 'undefined')?$("<a></a>"):$("<div></div>");
-                    oElement.css({
-                        outline: 'none'
-                    })
+                    var oElement = (typeof imageConfig.link != 'undefined')?$("<a></a>").css({outline: 'none'}):$("<div></div>");
+                    oElement
                     .attr('href',imageConfig.link)
                     .append(oImage);
                     oContainer.append(oElement);
@@ -141,15 +126,14 @@ $('#example1').imageMap(
                     var effect = false;
                     if(typeof imageConfig.effect == 'undefined')
                         imageConfig.effect = _options.effect; // Use default config as a fallback
-                    if(typeof imageConfig.effect.resize != 'undefined'
-                        && ((typeof imageConfig.effect.resize.active == 'undefined' && _options.effect.resize.active === true)
+                    if(typeof imageConfig.effect.resize == 'undefined')
+                        imageConfig.effect.resize = _options.effect.resize; // Use default config as a fallback
+                    if((typeof imageConfig.effect.resize.active == 'undefined' && _options.effect.resize.active === true)
                             || (typeof imageConfig.effect.resize.active != 'undefined' && imageConfig.effect.resize.active=== true)
-                            )) {
+                            ) {
                         oElement.bind(_options.event.on,function(e) {
                             effect = 'resize';
                             e.preventDefault();
-                            if(_options.debug)
-                                console.log('Event triggered: '+_options.event.on+' - effect: '+effect);
                             var link = $(this);
                             var image = link.children('.'+_options.mainPrefix+_options.imageClass);
                             var imageStyle = {
@@ -186,14 +170,10 @@ $('#example1').imageMap(
                                     height: height
                                 };
                             }
-                            if(_options.debug)
-                                console.log('Resize config: ',imageConfig.effect.resize," - Animation: ", animation);
                             image.animate(animation,_options.event.duration);
 
                             // Bind reverse event
                             link.bind(_options.event.off,function(){
-                                if(_options.debug)
-                                    console.log('Event triggered: '+_options.event.off+' - effect: '+effect);
 
                                 // Reverse animate
                                 var animation = {
@@ -211,15 +191,39 @@ $('#example1').imageMap(
                         });
                     }
 
-                    if(typeof imageConfig.effect.style != 'undefined'
-                        && ((typeof imageConfig.effect.style.active == 'undefined' && _options.effect.style.active === true)
-                            || (typeof imageConfig.effect.style.active != 'undefined' && imageConfig.effect.style.active=== true)
+                    if(typeof imageConfig.effect.image != 'undefined'
+                        && ((typeof imageConfig.effect.image.active == 'undefined' && _options.effect.image.active === true)
+                            || (typeof imageConfig.effect.image.active != 'undefined' && imageConfig.effect.image.active=== true)
                             )) {
+                        oElement.on(_options.event.on,function(e) {
+                            effect = 'image';
+                            e.preventDefault();
+
+                            var link = $(this);
+                            var image = link.children('.'+_options.mainPrefix+_options.imageClass);
+
+                            var imageSrc = image.attr('src');
+                            image.attr('src',imageConfig.effect.image.src)
+
+                            // Bind reverse event
+                            link.on(_options.event.off,function(){
+
+                                // Reverse styling
+                                $(this).children('.'+_options.mainPrefix+_options.imageClass)
+                                .attr('src',imageSrc)
+                                .off(_options.event.off);
+                            });
+                        });
+                    }
+
+                    if(typeof imageConfig.effect.style== 'undefined')
+                        imageConfig.effect.style = _options.effect.style; // Use default config as a fallback
+                    if((typeof imageConfig.effect.style.active == 'undefined' && _options.effect.style.active === true)
+                            || (typeof imageConfig.effect.style.active != 'undefined' && imageConfig.effect.style.active=== true)
+                            ) {
                         oElement.bind(_options.event.on,function(e) {
                             effect = 'styling';
                             e.preventDefault();
-                            if(_options.debug)
-                                console.log('Event triggered: '+_options.event.on+' - effect: '+effect);
 
                             var link = $(this);
                             var image = link.children('.'+_options.mainPrefix+_options.imageClass);
@@ -234,8 +238,6 @@ $('#example1').imageMap(
 
                             // Bind reverse event
                             link.bind(_options.event.off,function(){
-                                if(_options.debug)
-                                    console.log('Event triggered: '+_options.event.off+' - effect: '+effect+' - style: ',imageStyle);
 
                                 // Reverse styling
                                 $(this).children('.'+_options.mainPrefix+_options.imageClass)
@@ -244,20 +246,12 @@ $('#example1').imageMap(
                             });
                         });
                     }
-                    if(typeof _options.effect == 'function') {
+                    if(typeof imageConfig.effect.callback != 'undefined') {
                         effect = 'function';
-                        if(_options.debug)
-                            console.log('Callback function was binded.');
-                        oElement.bind(_options.event.on, _options.effect);
+                        oElement.bind((typeof imageConfig.effect.callback.on != 'undefined'?imageConfig.effect.callback.on:_options.event.on), imageConfig.effect.callback.f);
                     }
-                    if(effect == false && _options.debug)
-                        console.log('Effect is inactive ('+_options.effect+').');
                 }
-                else if(_options.debug)
-                    console.log('Element\'s '+index+' top and left position, image is not defined.');
             });
-            if(_options.debug)
-                console.log('Image elements created successfully');
 
             $this.prepend(oContainer);
         } else {

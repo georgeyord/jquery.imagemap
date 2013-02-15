@@ -6,11 +6,19 @@ Overlay image map with effects on hover
 The **jQuery ImageMap** class adds elements (images) to the appropriate positions on the target element and executes some effect (default: resize with animation) when the mouse passes over (or click or any other event set) these elements.
 
 ## Demostration
-**[Simple example](http://example.webwonder.gr/imagemap/example/example1.html)**
+
+## Demostration
+**[Basic usage](http://example.webwonder.gr/imagemap/example/example1.html)**
 *[source](https://github.com/georgeyord/imagemap/blob/master/example/example1.html)*
 
-**[Advanced example](http://example.webwonder.gr/imagemap/example/example2.html)**
+**[Advanced usage](http://example.webwonder.gr/imagemap/example/example2.html)**
 *[source](https://github.com/georgeyord/imagemap/blob/master/example/example2.html)*
+
+**[Replace image](http://example.webwonder.gr/imagemap/example/example3.html)**
+*[source](https://github.com/georgeyord/imagemap/blob/master/example/example3.html)*
+
+**[Callback functionality](http://example.webwonder.gr/imagemap/example/example4.html)**
+*[source](https://github.com/georgeyord/imagemap/blob/master/example/example4.html)*
 
 ## Getting Started
 
