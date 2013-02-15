@@ -3,8 +3,14 @@
 Overlay image map with effects on hover
 --------------------------------
 
+The **jQuery ImageMap** class adds elements (images) to the appropriate positions on the target element and executes some effect (default: resize with animation) when the mouse passes over (or click or any other event set) these elements.
 
-The jQuery ImageMap class adds elements (images) to the appropriate positions on the target element and executes some effect (default: resize with animation) when the mouse passes over (or click or any other event set) these elements.
+## Demostration
+**[Simple example](http://example.webwonder.gr/imagemap/example/example1.html)**
+*[source](https://github.com/georgeyord/imagemap/blob/master/example/example1.html)*
+
+**[Advanced example](http://example.webwonder.gr/imagemap/example/example2.html)**
+*[source](https://github.com/georgeyord/imagemap/blob/master/example/example2.html)*
 
 ## Getting Started
 
@@ -19,10 +25,20 @@ $('#example1').imageMap(
     elements: [
         {
             image: "image1.png",
-            link: "image1.htm",
             position: { top: 20,  left: 30 },
+            size: { width: 50,  height: 100 }
+        },
+        {
+            image: "image2.png",
+            link: "image2.htm", // Make it an active link
+            position: { top: 50,  left: 70 },
+            size: { width: 50,  height: 100 }
+        },
+        {
+            image: "image3.png",
+            position: { top: 100,  left: 40 },
             size: { width: 50,  height: 100 },
-            effect: { resize: { factor: 40 } }
+            effect: {resize: {active: true, factor: 70} // Add custom effect configuration
         }
     ]
 });
@@ -52,9 +68,12 @@ There are also the following OPTIONAL attributes:
 - effect: OPTIONAL override the default values for the effects, explained in detail later
 
 ### Effect structure
-ImageMap supports resize effect and styling through css rules. Each effect can be turned on/off by setting "active" attribute to true/false
-example to turn "resize" off and "style" on:
-```effect: {resize: {active: false}, style: {active: false}}```
+ImageMap supports resize effect and styling through css rules. Each effect can be turned on/off by setting "active" attribute to true/false.  
+*Example to turn "resize" off and "style" on:* ```effect: {resize: {active: false}, style: {active: true}}```
 
-Resize config can contain either a "factor" to the final size or the exact "width".
-Style config can contain any css styling rules in css attribute.
+- **Resize** config can contain either a "factor" to the final size or the exact "width".  
+*Example with factor:* ```effect: {resize: {active: true, factor: 60}```  
+*Example with width:* ```effect: {resize: {active: true, width: 100}```
+
+- **Style** config can contain any css styling rules in css attribute.  
+*Example with css:* ```effect: {style: {active: true, css: {background: "red"}}```
