@@ -145,7 +145,7 @@ $('#example1').imageMap(
                         && ((typeof imageConfig.effect.resize.active == 'undefined' && _options.effect.resize.active === true)
                             || (typeof imageConfig.effect.resize.active != 'undefined' && imageConfig.effect.resize.active=== true)
                             )) {
-                        oElement.on(_options.event.on,function(e) {
+                        oElement.bind(_options.event.on,function(e) {
                             effect = 'resize';
                             e.preventDefault();
                             if(_options.debug)
@@ -191,7 +191,7 @@ $('#example1').imageMap(
                             image.animate(animation,_options.event.duration);
 
                             // Bind reverse event
-                            link.on(_options.event.off,function(){
+                            link.bind(_options.event.off,function(){
                                 if(_options.debug)
                                     console.log('Event triggered: '+_options.event.off+' - effect: '+effect);
 
@@ -206,7 +206,7 @@ $('#example1').imageMap(
                                 .css(imageStyle)
                                 .stop(false/*clearQueue*/,false/*jumpToEnd*/)
                                 .animate(animation,_options.event.duration)
-                                .off(_options.event.off);
+                                .unbind(_options.event.off);
                             });
                         });
                     }
@@ -215,7 +215,7 @@ $('#example1').imageMap(
                         && ((typeof imageConfig.effect.style.active == 'undefined' && _options.effect.style.active === true)
                             || (typeof imageConfig.effect.style.active != 'undefined' && imageConfig.effect.style.active=== true)
                             )) {
-                        oElement.on(_options.event.on,function(e) {
+                        oElement.bind(_options.event.on,function(e) {
                             effect = 'styling';
                             e.preventDefault();
                             if(_options.debug)
@@ -233,14 +233,14 @@ $('#example1').imageMap(
                             image.css(imageConfig.effect.style.css);
 
                             // Bind reverse event
-                            link.on(_options.event.off,function(){
+                            link.bind(_options.event.off,function(){
                                 if(_options.debug)
                                     console.log('Event triggered: '+_options.event.off+' - effect: '+effect+' - style: ',imageStyle);
 
                                 // Reverse styling
                                 $(this).children('.'+_options.mainPrefix+_options.imageClass)
                                 .css(imageStyle)
-                                .off(_options.event.off);
+                                .unbind(_options.event.off);
                             });
                         });
                     }
@@ -248,7 +248,7 @@ $('#example1').imageMap(
                         effect = 'function';
                         if(_options.debug)
                             console.log('Callback function was binded.');
-                        oElement.on(_options.event.on, _options.effect);
+                        oElement.bind(_options.event.on, _options.effect);
                     }
                     if(effect == false && _options.debug)
                         console.log('Effect is inactive ('+_options.effect+').');

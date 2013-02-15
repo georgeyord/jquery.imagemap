@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.imagemap.j16.js" language="javascript"></script>
+        <script language="javascript">
+            $(document).ready(function() {
+                $('#main').imageMap({
+                    // debug: true,
+                    elements: [
+                        {
+                            image: "./images/pisa/part_01.png",
+                            position: {top: 74, left: 33},
+                            size: {width: 166, height: 147}
+                        },
+                        {
+                            image: "./images/pisa/part_02.png",
+                            position: {top: 147, left: 233},
+                            size: {width: 73, height: 59}
+                        },
+                        {
+                            image: "./images/pisa/part_03.png",
+                            position: {top: 227, left: 93},
+                            size: {width: 47, height: 71}
+                        },
+                        {
+                            image: "./images/pisa/part_04.png",
+                            position: {top: 273, left: 226},
+                            size: {width: 117, height: 100}
+                        },
+                        {
+                            image: "./images/pisa/part_05.png",
+                            position: {top: 322, left: 54},
+                            size: {width: 161, height: 129}
+                        },
+                        {
+                            image: "./images/pisa/part_06.png",
+                            position: {top: 428, left: 214},
+                            size: {width: 161, height: 128}
+                        },
+                        {
+                            image: "./images/pisa/part_07.png",
+                            position: {top: 466, left: 50},
+                            size: {width: 113, height: 91}
+                        },
+                        {
+                            image: "./images/pisa/part_08.png",
+                            position: {top: 567, left: 91},
+                            size: {width: 167, height: 151}
+                        },
+                        {
+                            image: "./images/pisa/part_09.png",
+                            position: {top: 567, left: 284},
+                            size: {width: 165, height: 155}
+                        }
+                    ]
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="main">
+            <img src="./images/pisa/main.jpg" alt="">
+        </div>
+    </body>
+</html>

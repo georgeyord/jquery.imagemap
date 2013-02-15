@@ -52,6 +52,9 @@ There are also the following OPTIONAL attributes:
 - effect: OPTIONAL override the default values for the effects, explained in detail later
 
 ### Effect structure
-ImageMap supports resize effect and styling through css rules.
+ImageMap supports resize effect and styling through css rules. Each effect can be turned on/off by setting "active" attribute to true/false
+example to turn "resize" off and "style" on:
+```effect: {resize: {active: false}, style: {active: false}}```
+
 Resize config can contain either a "factor" to the final size or the exact "width".
-Css config can contain any css styling rules.
+Style config can contain any css styling rules in css attribute.

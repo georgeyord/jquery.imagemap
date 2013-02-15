@@ -1,3 +1,12 @@
+<?php
+/**
+ * JS FILES PRODUCER
+ */
+
+$debug = true;
+$j14 = false;
+?>
+<script language="javascript">
 /**
  * ImageMap class adds elements (images) to the appropriate positions on the target element and
  * executes some effect (default: animated resize when the mouse passes over (or click or any other event set) these elements
@@ -41,7 +50,9 @@ $('#example1').imageMap(
             duration: 500
         },
         preloadImages: true,
+<?php if($debug): ?>
         debug: false,
+<?php endif; ?>
         elements: {},
         zIndex: 'auto',
 
@@ -64,17 +75,21 @@ $('#example1').imageMap(
                 position: 'relative'
             })
             .addClass(_options.mainPrefix+_options.containerClass);
+<?php if($debug): ?>
             if(_options.debug){
                 oContainer.css({
                     border: 'blue 1px dashed'
                 });
                 console.log('Target element created successfully');
             }
+<?php endif; ?>
 
             // Preload images
             if(_options.preloadImages) {
+<?php if($debug): ?>
                 if(_options.debug)
                     console.log('Images preloading was activated');
+<?php endif; ?>
                 $.each(_options.elements,function(index,imageConfig){
                     $('<img/>')[0].src = imageConfig.image;
                     // Alternatively way:
@@ -97,10 +112,12 @@ $('#example1').imageMap(
                     .data('config',imageConfig)
                     .attr('src','./'+imageConfig.image)
                     .addClass(_options.mainPrefix+_options.imageClass);
+<?php if($debug): ?>
                     if(_options.debug)
                         oImage.css({
                             border: 'red 1px dashed'
                         });
+<?php endif; ?>
                     if(typeof imageConfig.size != 'undefined'){
                         if(typeof imageConfig.size.width != 'undefined')
                             oImage.css({
@@ -145,11 +162,13 @@ $('#example1').imageMap(
                         && ((typeof imageConfig.effect.resize.active == 'undefined' && _options.effect.resize.active === true)
                             || (typeof imageConfig.effect.resize.active != 'undefined' && imageConfig.effect.resize.active=== true)
                             )) {
-                        oElement.on(_options.event.on,function(e) {
+                        oElement.<?php echo $j14?'bind':'on'; ?>(_options.event.on,function(e) {
                             effect = 'resize';
                             e.preventDefault();
+<?php if($debug): ?>
                             if(_options.debug)
                                 console.log('Event triggered: '+_options.event.on+' - effect: '+effect);
+<?php endif; ?>
                             var link = $(this);
                             var image = link.children('.'+_options.mainPrefix+_options.imageClass);
                             var imageStyle = {
@@ -186,14 +205,18 @@ $('#example1').imageMap(
                                     height: height
                                 };
                             }
+<?php if($debug): ?>
                             if(_options.debug)
                                 console.log('Resize config: ',imageConfig.effect.resize," - Animation: ", animation);
+<?php endif; ?>
                             image.animate(animation,_options.event.duration);
 
                             // Bind reverse event
-                            link.on(_options.event.off,function(){
+                            link.<?php echo $j14?'bind':'on'; ?>(_options.event.off,function(){
+<?php if($debug): ?>
                                 if(_options.debug)
                                     console.log('Event triggered: '+_options.event.off+' - effect: '+effect);
+<?php endif; ?>
 
                                 // Reverse animate
                                 var animation = {
@@ -206,7 +229,7 @@ $('#example1').imageMap(
                                 .css(imageStyle)
                                 .stop(false/*clearQueue*/,false/*jumpToEnd*/)
                                 .animate(animation,_options.event.duration)
-                                .off(_options.event.off);
+                                .<?php echo $j14?'unbind':'off'; ?>(_options.event.off);
                             });
                         });
                     }
@@ -215,11 +238,13 @@ $('#example1').imageMap(
                         && ((typeof imageConfig.effect.style.active == 'undefined' && _options.effect.style.active === true)
                             || (typeof imageConfig.effect.style.active != 'undefined' && imageConfig.effect.style.active=== true)
                             )) {
-                        oElement.on(_options.event.on,function(e) {
+                        oElement.<?php echo $j14?'bind':'on'; ?>(_options.event.on,function(e) {
                             effect = 'styling';
                             e.preventDefault();
+<?php if($debug): ?>
                             if(_options.debug)
                                 console.log('Event triggered: '+_options.event.on+' - effect: '+effect);
+<?php endif; ?>
 
                             var link = $(this);
                             var image = link.children('.'+_options.mainPrefix+_options.imageClass);
@@ -233,31 +258,41 @@ $('#example1').imageMap(
                             image.css(imageConfig.effect.style.css);
 
                             // Bind reverse event
-                            link.on(_options.event.off,function(){
+                            link.<?php echo $j14?'bind':'on'; ?>(_options.event.off,function(){
+<?php if($debug): ?>
                                 if(_options.debug)
                                     console.log('Event triggered: '+_options.event.off+' - effect: '+effect+' - style: ',imageStyle);
+<?php endif; ?>
 
                                 // Reverse styling
                                 $(this).children('.'+_options.mainPrefix+_options.imageClass)
                                 .css(imageStyle)
-                                .off(_options.event.off);
+                                .<?php echo $j14?'unbind':'off'; ?>(_options.event.off);
                             });
                         });
                     }
                     if(typeof _options.effect == 'function') {
                         effect = 'function';
+<?php if($debug): ?>
                         if(_options.debug)
                             console.log('Callback function was binded.');
-                        oElement.on(_options.event.on, _options.effect);
+<?php endif; ?>
+                        oElement.<?php echo $j14?'bind':'on'; ?>(_options.event.on, _options.effect);
                     }
+<?php if($debug): ?>
                     if(effect == false && _options.debug)
                         console.log('Effect is inactive ('+_options.effect+').');
+<?php endif; ?>
                 }
+<?php if($debug): ?>
                 else if(_options.debug)
                     console.log('Element\'s '+index+' top and left position, image is not defined.');
+<?php endif; ?>
             });
+<?php if($debug): ?>
             if(_options.debug)
                 console.log('Image elements created successfully');
+<?php endif; ?>
 
             $this.prepend(oContainer);
         } else {
@@ -266,3 +301,4 @@ $('#example1').imageMap(
         return $this.each(function() {});
     };
 })(jQuery);
+</script>
