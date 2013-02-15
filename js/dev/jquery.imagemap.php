@@ -94,6 +94,11 @@ $('#example1').imageMap(
                     $('<img/>')[0].src = imageConfig.image;
                     // Alternatively way:
                     (new Image()).src = imageConfig.image;
+                    if(typeof imageConfig.image.effect != 'undefined' && typeof imageConfig.image.effect.image != 'undefined' && typeof imageConfig.image.effect.image.src != 'undefined'){
+                        $('<img/>')[0].src = imageConfig.image.effect.image.src;
+                        // Alternatively way:
+                        (new Image()).src = imageConfig.image.effect.image.src;
+                    }
                 });
             }
 
