@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>imageMap - jQuery plugin by georgeyord</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>imageMap - jQuery plugin</h1>
+        <p>Create an overlay image map with hover effects</p>
+
+        <p class="view"><a href="https://github.com/georgeyord/jquery.imagemap">View the Project on GitHub <small>georgeyord/jquery.imagemap</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/georgeyord/jquery.imagemap/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/georgeyord/jquery.imagemap/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/georgeyord/jquery.imagemap">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="imagemap---jquery-plugin" class="anchor" href="#imagemap---jquery-plugin"><span class="octicon octicon-link"></span></a><a href="https://github.com/georgeyord/imagemap">imageMap - jQuery plugin</a>
+</h1>
+
+<h2>
+<a name="create-an-overlay-image-map-with-hover-effects" class="anchor" href="#create-an-overlay-image-map-with-hover-effects"><span class="octicon octicon-link"></span></a>Create an overlay image map with hover effects</h2>
+
+<p>The <strong>jQuery ImageMap</strong> class adds elements (images) to the appropriate positions on the target element and executes some effect (default: resize with animation) when the mouse passes over (or click or any other event set) these elements.</p>
+
+<h2>
+<a name="demostration" class="anchor" href="#demostration"><span class="octicon octicon-link"></span></a>Demostration</h2>
+
+<h2>
+<a name="demostration-1" class="anchor" href="#demostration-1"><span class="octicon octicon-link"></span></a>Demostration</h2>
+
+<p><strong><a href="http://example.webwonder.gr/imagemap/example/example1.html">Basic usage</a></strong>
+<em><a href="https://github.com/georgeyord/imagemap/blob/master/example/example1.html">source</a></em></p>
+
+<p><strong><a href="http://example.webwonder.gr/imagemap/example/example2.html">Advanced usage</a></strong>
+<em><a href="https://github.com/georgeyord/imagemap/blob/master/example/example2.html">source</a></em></p>
+
+<p><strong><a href="http://example.webwonder.gr/imagemap/example/example3.html">Replace image</a></strong>
+<em><a href="https://github.com/georgeyord/imagemap/blob/master/example/example3.html">source</a></em></p>
+
+<p><strong><a href="http://example.webwonder.gr/imagemap/example/example4.html">Callback functionality</a></strong>
+<em><a href="https://github.com/georgeyord/imagemap/blob/master/example/example4.html">source</a></em></p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Include jQuery and the plugin on a page. Then select an element add the overlay:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.imagemap.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#example1'</span><span class="p">).</span><span class="nx">imageMap</span><span class="p">(</span>
+<span class="p">{</span>
+    <span class="nx">elements</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">image</span><span class="o">:</span> <span class="s2">"image1.png"</span><span class="p">,</span>
+            <span class="nx">position</span><span class="o">:</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>  <span class="nx">left</span><span class="o">:</span> <span class="mi">30</span> <span class="p">},</span>
+            <span class="nx">size</span><span class="o">:</span> <span class="p">{</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>  <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nx">image</span><span class="o">:</span> <span class="s2">"image2.png"</span><span class="p">,</span>
+            <span class="nx">link</span><span class="o">:</span> <span class="s2">"image2.htm"</span><span class="p">,</span> <span class="c1">// Make it an active link</span>
+            <span class="nx">position</span><span class="o">:</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>  <span class="nx">left</span><span class="o">:</span> <span class="mi">70</span> <span class="p">},</span>
+            <span class="nx">size</span><span class="o">:</span> <span class="p">{</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>  <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nx">image</span><span class="o">:</span> <span class="s2">"image3.png"</span><span class="p">,</span>
+            <span class="nx">position</span><span class="o">:</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="nx">left</span><span class="o">:</span> <span class="mi">40</span> <span class="p">},</span>
+            <span class="nx">size</span><span class="o">:</span> <span class="p">{</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>  <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span> <span class="p">},</span>
+            <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">resize</span><span class="o">:</span> <span class="p">{</span><span class="nx">active</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">factor</span><span class="o">:</span> <span class="mi">70</span><span class="p">}</span> <span class="c1">// Add custom effect configuration</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="main-config" class="anchor" href="#main-config"><span class="octicon octicon-link"></span></a>Main config</h3>
+
+<p>The config object MUST contain the elements array. Element structure explained later.
+There are also the following OPTIONAL attributes:</p>
+
+<ul>
+<li>debug: if set true, extensive information is logged in console</li>
+<li>preloadImages: if set true a very simple preloading process is performed</li>
+<li>zIndex: set the zIndex when the effect is activated</li>
+<li>event: override default activation/deactivation events and duration of animation events</li>
+<li>effect: override the default values for the effects, explained in detail later</li>
+<li>mainPrefix: override the default prefix for css "mainPrefix"</li>
+<li>containerClass: override the default container class "containerClass"</li>
+<li>imageClass: override the default image class "imageClass"</li>
+<li>additionalImageClass: append more classes to imageClass mentioned above</li>
+</ul><h3>
+<a name="element-structure" class="anchor" href="#element-structure"><span class="octicon octicon-link"></span></a>Element structure</h3>
+
+<ul>
+<li>image: REQUIRED - path to image filename</li>
+<li>position: REQUIRED - distance from top/left corner of the target element</li>
+<li>size: REQUIRED - width/height of the initial image</li>
+<li>link: OPTIONAL - if set the image will be an active link</li>
+<li>effect: OPTIONAL override the default values for the effects, explained in detail later</li>
+</ul><h3>
+<a name="effect-structure" class="anchor" href="#effect-structure"><span class="octicon octicon-link"></span></a>Effect structure</h3>
+
+<p>ImageMap supports resize effect and styling through css rules. Each effect can be turned on/off by setting "active" attribute to true/false.<br><em>Example to turn "resize" off and "style" on:</em> <code>effect: {resize: {active: false}, style: {active: true}}</code></p>
+
+<ul>
+<li><p><strong>Resize</strong> config can contain either a "factor" to the final size or the exact "width".<br><em>Example with factor:</em> <code>effect: {resize: {active: true, factor: 60}</code><br><em>Example with width:</em> <code>effect: {resize: {active: true, width: 100}</code></p></li>
+<li><p><strong>Style</strong> config can contain any css styling rules in css attribute.<br><em>Example with css:</em> <code>effect: {style: {active: true, css: {background: "red"}}</code></p></li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/georgeyord">georgeyord</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
